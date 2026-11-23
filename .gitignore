@@ -1,0 +1,3 @@
+data/*.csv
+data/*.duckdb
+send_to_posthog.py

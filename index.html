@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cosmetics Store Analytics</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="config.js"></script>
+<script src="analytics.js"></script>
+<style>
+  :root{--bg:#0f172a;--panel:#111c33;--line:#24345a;--text:#e2e8f0;--muted:#94a3b8;--accent:#38bdf8;--accent2:#a78bfa;--good:#34d399;--bad:#f87171}
+  *{box-sizing:border-box}
+  body{font-family:Inter,system-ui,sans-serif;margin:0;background:var(--bg);color:var(--text);line-height:1.5}
+  nav{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding:14px 24px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#0f172af0;backdrop-filter:blur(8px);z-index:5}
+  nav b{font-size:18px} nav .links a{color:var(--muted);margin-left:16px;text-decoration:none;font-size:14px} nav .links a:hover{color:var(--text)}
+  .wrap{max-width:1200px;margin:0 auto;padding:24px 16px}
+  .hero h1{font-size:clamp(24px,4vw,36px);margin:0;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;color:transparent}
+  .hero p{color:var(--muted);max-width:820px}
+  .pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;border:1px solid var(--line);color:var(--muted);margin:2px}
+  h2{font-size:20px;margin:36px 0 4px} .lead{color:var(--muted);margin:0 0 14px;font-size:14px}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:18px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0}
+  .kpi .l{color:var(--muted);font-size:13px}.kpi b{font-size:26px;display:block}.kpi .h{font-size:12px;color:var(--muted)}
+  .g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:14px}
+  .card h3{margin:0 0 2px;font-size:16px}.card .d{color:var(--muted);font-size:13px;margin:0 0 10px}
+  .ins{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+  .ins .card{border-left:3px solid var(--accent)} .ins .card b{color:var(--accent)}
+  .tw{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);white-space:nowrap} th{color:var(--muted);font-weight:600}
+  td.n,th.n{text-align:right}
+  .heat td{text-align:center}
+  .bad{color:var(--bad)}.good{color:var(--good)}
+  footer{color:var(--muted);text-align:center;padding:30px;font-size:13px;border-top:1px solid var(--line);margin-top:40px}
+  code{color:var(--accent2)}
+</style>
+</head>
+<body>
+<nav><b>💄 Cosmetics Store · Product Analytics</b>
+  <span class="links"><a href="#funnel">Funnel</a><a href="#engagement">Engagement</a><a href="#retention">Retention</a><a href="#products">Products</a><a href="#customers">Customers</a></span></nav>
+<div class="wrap">
+  <section class="hero">
+    <h1>How shoppers behave in an online cosmetics store</h1>
+    <p>This dashboard analyzes <b id="evcount"></b> real events (product views, add-to-cart, remove-from-cart and purchases) from a mid-size online cosmetics store, using the public Kaggle dataset <i>eCommerce Events History in Cosmetics Shop</i>. The raw events were loaded into <b>DuckDB</b> and analyzed with SQL (<code>analysis.py</code>).</p>
+    <span class="pill" id="period"></span><span class="pill">Source: Kaggle (mkechinov)</span><span class="pill">Stack: Python · DuckDB · SQL · Chart.js</span>
+  </section>
+
+  <div class="kpis" id="kpis"></div>
+
+  <h2>💡 Key findings</h2><p class="lead">The main points from the analysis below</p>
+  <div class="ins" id="insights"></div>
+
+  <h2 id="funnel">🔻 Conversion funnel</h2>
+  <p class="lead">How many shoppers got through each step, counted by user and by session. A user counts as purchased only if they added to cart first.</p>
+  <div class="g2">
+    <div class="card"><h3>User funnel</h3><p class="d">Unique users reaching each step</p><canvas id="cFunnel"></canvas></div>
+    <div class="card"><h3>Session funnel</h3><p class="d">Share of sessions reaching each step</p><canvas id="cSFunnel"></canvas></div>
+  </div>
+
+  <h2 id="engagement">📈 Engagement and revenue over time</h2>
+  <p class="lead">Daily activity across the month, and when during the day people browse and buy (UTC)</p>
+  <div class="g2">
+    <div class="card"><h3>Daily active users</h3><p class="d">Unique users with any event that day</p><canvas id="cDau"></canvas></div>
+    <div class="card"><h3>Daily revenue</h3><p class="d">Sum of the price on each purchase event</p><canvas id="cRev"></canvas></div>
+    <div class="card"><h3>Activity by hour of day</h3><p class="d">All events compared with purchases (purchases on the right axis)</p><canvas id="cHour"></canvas></div>
+    <div class="card"><h3>Buying vs browsing sessions</h3><p class="d">Sessions that ended in a purchase compared with the rest</p><div class="tw"><table id="tSess"></table></div><canvas id="cMix" style="margin-top:14px;max-height:220px"></canvas></div>
+  </div>
+
+  <h2 id="retention">🔁 Weekly cohort retention</h2>
+  <p class="lead">Users are grouped by the week they first appeared. Each cell is the share still active N weeks later. The data only covers this month, so later weeks are incomplete.</p>
+  <div class="card tw"><table class="heat" id="tRet"></table></div>
+
+  <h2 id="products">🛍️ Products and pricing</h2>
+  <p class="lead">Which brands earn the most, how price affects conversion, and which products get removed from carts most</p>
+  <div class="g2">
+    <div class="card"><h3>Conversion by price band</h3><p class="d">Purchases ÷ views in each price band</p><canvas id="cPrice"></canvas></div>
+    <div class="card tw"><h3>Top 10 brands by revenue</h3><p class="d">View-to-buy = purchases ÷ views</p><table id="tBrands"></table></div>
+    <div class="card tw"><h3>Top 10 products by revenue</h3><p class="d">Best-selling product IDs</p><table id="tProd"></table></div>
+    <div class="card tw"><h3>Most-removed products</h3><p class="d">Products with 200+ cart adds, ranked by removals per cart add. Ratios above 1× mean shoppers removed them more often than they added them.</p><table id="tAband"></table></div>
+  </div>
+
+  <h2 id="customers">👥 Customer value</h2>
+  <p class="lead">Buyers grouped by number of orders (sessions with a purchase)</p>
+  <div class="g2">
+    <div class="card"><h3>Revenue share by segment</h3><p class="d">Share of the month's revenue from each group</p><canvas id="cSeg"></canvas></div>
+    <div class="card tw"><h3>Segment details</h3><p class="d">Repeat buyers spend far more each</p><table id="tSeg"></table></div>
+  </div>
+</div>
+<footer>Data: Kaggle “eCommerce Events History in Cosmetics Shop” · Analysis: <code>analysis.py</code> (DuckDB SQL) → <code>results.json</code></footer>
+
+<script>
+Chart.defaults.color="#94a3b8"; Chart.defaults.borderColor="#24345a"; Chart.defaults.font.family="Inter, system-ui";
+const PAL=["#38bdf8","#a78bfa","#34d399","#fbbf24","#f472b6","#60a5fa"];
+const $=id=>document.getElementById(id);
+const fmt=n=>n==null?"–":Number(n).toLocaleString();
+const money=n=>"$"+Number(n).toLocaleString(undefined,{maximumFractionDigits:0});
+const pct=(a,b)=>b?(a/b*100).toFixed(1)+"%":"–";
+const noLegend={plugins:{legend:{display:false}}};
+function chart(id,type,labels,datasets,options={}){
+  return new Chart($(id),{type,data:{labels,datasets:datasets.map((d,i)=>({borderRadius:6,tension:.3,backgroundColor:PAL[i],borderColor:PAL[i],...d}))},options});
+}
+function table(id,cols,rows){
+  $(id).innerHTML="<tr>"+cols.map(c=>`<th class="${c[2]||''}">${c[0]}</th>`).join("")+"</tr>"+
+    rows.map(r=>"<tr>"+cols.map(c=>`<td class="${c[2]||''}">${c[1](r)}</td>`).join("")+"</tr>").join("");
+}
+
+fetch("results.json").then(r=>r.json()).then(R=>{
+  const o=R.overview, f=R.funnel, sf=R.session_funnel, a=R.aov;
+  $("evcount").textContent=(o.events/1e6).toFixed(2)+" million";
+  $("period").textContent=`📅 ${o.start_date} → ${o.end_date}`;
+  const conv=f.purchased/f.viewed*100;
+  $("kpis").innerHTML=[["👥 Users",fmt(o.users),"Unique shoppers"],["🧭 Sessions",fmt(o.sessions),"Browsing sessions"],
+    ["💰 Revenue",money(o.revenue),"From purchase events"],["🛒 Buyers",fmt(o.buyers),pct(o.buyers,o.users)+" of users"],
+    ["🎯 View→Buy",conv.toFixed(1)+"%","User-level conversion"],["🧾 Avg. order",money(a.aov),`${a.avg_items} items per order on average`]]
+    .map(([l,v,h])=>`<div class="card kpi"><div class="l">${l}</div><b>${v}</b><div class="h">${h}</div></div>`).join("");
+
+  // Funnels
+  chart("cFunnel","bar",[`Viewed (100%)`,`Added to cart (${pct(f.carted,f.viewed)})`,`Purchased (${pct(f.purchased,f.viewed)})`],
+    [{data:[f.viewed,f.carted,f.purchased],backgroundColor:PAL}],{indexAxis:"y",...noLegend});
+  chart("cSFunnel","bar",["Viewed","Added to cart","Purchased"],
+    [{data:[sf.viewed,sf.carted,sf.purchased].map(v=>+(v/sf.sessions*100).toFixed(1)),backgroundColor:PAL}],
+    {...noLegend,scales:{y:{ticks:{callback:v=>v+"%"}}}});
+
+  // Time
+  const days=R.daily.map(d=>d.day.slice(5));
+  chart("cDau","line",days,[{data:R.daily.map(d=>d.dau),fill:{target:"origin",above:"#38bdf822"}}],noLegend);
+  chart("cRev","bar",days,[{data:R.daily.map(d=>d.revenue),backgroundColor:PAL[1]}],noLegend);
+  chart("cHour","line",R.hourly.map(h=>h.hour+":00"),[{label:"Events",data:R.hourly.map(h=>h.events),yAxisID:"y"},
+    {label:"Purchases",data:R.hourly.map(h=>h.purchases),yAxisID:"y1"}],{scales:{y1:{position:"right",grid:{display:false}}}});
+  table("tSess",[["Session type",r=>r.bought?"🛒 Bought":"👀 Browsed only"],["Sessions",r=>fmt(r.sessions),"n"],["Avg. events",r=>r.avg_events,"n"],["Median length",r=>r.median_minutes+" min","n"]],R.sessions);
+  chart("cMix","doughnut",R.event_mix.map(e=>e.event_type),[{data:R.event_mix.map(e=>e.n),backgroundColor:PAL}],{plugins:{legend:{position:"right"},title:{display:true,text:"Event mix"}}});
+
+  // Retention heatmap
+  const cohorts=[...new Set(R.retention.map(r=>r.cohort))], maxW=Math.max(...R.retention.map(r=>r.w));
+  let h="<tr><th>Cohort (first week)</th><th class='n'>Users</th>"+Array.from({length:maxW+1},(_,i)=>`<th>Week ${i}</th>`).join("")+"</tr>";
+  cohorts.forEach(c=>{const rows=R.retention.filter(r=>r.cohort===c);
+    h+=`<tr><td>${c}</td><td class="n">${fmt(rows[0].n)}</td>`+Array.from({length:maxW+1},(_,w)=>{const r=rows.find(x=>x.w===w);
+      if(!r) return "<td></td>"; const al=Math.max(.08,r.pct/100);
+      return `<td style="background:rgba(56,189,248,${al});color:${al>.5?'#0b1020':'inherit'}">${r.pct}%</td>`;}).join("")+"</tr>";});
+  $("tRet").innerHTML=h;
+
+  // Products
+  chart("cPrice","bar",R.price_bands.map(p=>p.band),[{data:R.price_bands.map(p=>p.conv),backgroundColor:PAL}],
+    {...noLegend,scales:{y:{ticks:{callback:v=>v+"%"}}}});
+  table("tBrands",[["Brand",r=>r.brand],["Views",r=>fmt(r.views),"n"],["Purchases",r=>fmt(r.purchases),"n"],["Revenue",r=>money(r.revenue),"n"],["View→Buy",r=>r.view_to_buy+"%","n"]],R.top_brands);
+  table("tProd",[["Product",r=>r.product_id],["Brand",r=>r.brand||"–"],["Price",r=>"$"+r.price,"n"],["Views",r=>fmt(r.views),"n"],["Purchases",r=>fmt(r.purchases),"n"],["Revenue",r=>money(r.revenue),"n"]],R.top_products);
+  table("tAband",[["Product",r=>r.product_id],["Brand",r=>r.brand||"–"],["Price",r=>"$"+r.price,"n"],["Cart adds",r=>fmt(r.carts),"n"],["Removes",r=>fmt(r.removes),"n"],["Removes ÷ adds",r=>`<span class="bad">${(r.removes/r.carts).toFixed(2)}×</span>`,"n"]],R.most_abandoned);
+
+  // Customers
+  chart("cSeg","doughnut",R.customers.map(c=>c.segment),[{data:R.customers.map(c=>c.revenue),backgroundColor:PAL}],{plugins:{legend:{position:"right"}}});
+  table("tSeg",[["Segment",r=>r.segment],["Customers",r=>fmt(r.customers),"n"],["Revenue",r=>money(r.revenue),"n"],["Avg. spend",r=>money(r.avg_spend),"n"]],R.customers);
+
+  // Insights (computed, not hard-coded)
+  const repeat=R.customers.filter(c=>c.segment!=="One-time");
+  const repC=repeat.reduce((s,c)=>s+c.customers,0), repR=repeat.reduce((s,c)=>s+c.revenue,0);
+  const best=[...R.daily].sort((x,y)=>y.revenue-x.revenue)[0], worst=[...R.daily].sort((x,y)=>x.revenue-y.revenue)[0];
+  const pk=[...R.hourly].sort((x,y)=>y.purchases-x.purchases)[0];
+  const pb=R.price_bands, wk1=R.retention.find(r=>r.w===1&&r.cohort===cohorts[1])||R.retention.find(r=>r.w===1);
+  const buy=R.sessions.find(s=>s.bought), brw=R.sessions.find(s=>!s.bought);
+  const ins=[
+    ["Most shoppers drop off before adding to cart",`Only <b>${pct(f.carted,f.viewed)}</b> of viewers add anything to their cart. Of those, <b>${pct(f.purchased,f.carted)}</b> go on to buy. The product page is where most shoppers are lost.`],
+    ["Cheaper items convert better",`Items under $5 convert at <b>${pb[0].conv}%</b>, while items over $50 convert at <b>${pb[pb.length-1].conv}%</b>. Shoppers buy small, frequent purchases and mostly just browse expensive items.`],
+    ["Repeat buyers are worth much more",`<b>${pct(repC,o.buyers)}</b> of buyers made more than one order but brought in <b>${pct(repR,o.revenue)}</b> of revenue. Loyalty programs and reminder emails should pay off.`],
+    ["Retention drops fast",`Only <b>${wk1?wk1.pct:"–"}%</b> of a weekly cohort comes back the next week. Most visitors come once.`],
+    ["Buying sessions are much longer",`Sessions that end in a purchase average <b>${buy.avg_events}</b> events over a median of <b>${buy.median_minutes} min</b>. Browse-only sessions average <b>${brw.avg_events}</b> events, and most last under a minute.`],
+    ["Revenue changes a lot by day and hour",`The best day was <b>${best.day.slice(5)}</b> (${money(best.revenue)}) and the worst was <b>${worst.day.slice(5)}</b> (${money(worst.revenue)}), likely the holidays. Purchases peak at <b>${pk.hour}:00 UTC</b>.`]];
+  $("insights").innerHTML=ins.map(([t,b])=>`<div class="card"><h3>${t}</h3><p class="d" style="margin:6px 0 0;color:var(--text)">${b}</p></div>`).join("");
+});
+</script>
+</body>
+</html>

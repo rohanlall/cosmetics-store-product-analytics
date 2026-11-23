@@ -1,0 +1,834 @@
+{
+ "source": "2019-Dec.csv",
+ "overview": {
+  "events": 3533286,
+  "users": 370154,
+  "sessions": 839812,
+  "products": 44624,
+  "purchases": 213176,
+  "revenue": 1077624.85,
+  "buyers": 25613,
+  "start_date": "2019-12-01",
+  "end_date": "2019-12-31"
+ },
+ "event_mix": [
+  {
+   "event_type": "view",
+   "n": 1728331
+  },
+  {
+   "event_type": "cart",
+   "n": 927124
+  },
+  {
+   "event_type": "remove_from_cart",
+   "n": 664655
+  },
+  {
+   "event_type": "purchase",
+   "n": 213176
+  }
+ ],
+ "funnel": {
+  "viewed": 358212,
+  "carted": 83458,
+  "purchased": 25241
+ },
+ "session_funnel": {
+  "sessions": 839812,
+  "viewed": 794416,
+  "carted": 165295,
+  "purchased": 28894
+ },
+ "daily": [
+  {
+   "day": "2019-12-01",
+   "dau": 17540,
+   "sessions": 29616,
+   "purchases": 7236,
+   "revenue": 32701.1
+  },
+  {
+   "day": "2019-12-02",
+   "dau": 19391,
+   "sessions": 31948,
+   "purchases": 9079,
+   "revenue": 43304.28
+  },
+  {
+   "day": "2019-12-03",
+   "dau": 18735,
+   "sessions": 30841,
+   "purchases": 8217,
+   "revenue": 38703.91
+  },
+  {
+   "day": "2019-12-04",
+   "dau": 18836,
+   "sessions": 30422,
+   "purchases": 8371,
+   "revenue": 41233.5
+  },
+  {
+   "day": "2019-12-05",
+   "dau": 18183,
+   "sessions": 29983,
+   "purchases": 7767,
+   "revenue": 37379.7
+  },
+  {
+   "day": "2019-12-06",
+   "dau": 16948,
+   "sessions": 28074,
+   "purchases": 7383,
+   "revenue": 36516.54
+  },
+  {
+   "day": "2019-12-07",
+   "dau": 15508,
+   "sessions": 26036,
+   "purchases": 6023,
+   "revenue": 27908.62
+  },
+  {
+   "day": "2019-12-08",
+   "dau": 16835,
+   "sessions": 26968,
+   "purchases": 6595,
+   "revenue": 32046.51
+  },
+  {
+   "day": "2019-12-09",
+   "dau": 19777,
+   "sessions": 33980,
+   "purchases": 9294,
+   "revenue": 45978.2
+  },
+  {
+   "day": "2019-12-10",
+   "dau": 19336,
+   "sessions": 32876,
+   "purchases": 9794,
+   "revenue": 47542.27
+  },
+  {
+   "day": "2019-12-11",
+   "dau": 20128,
+   "sessions": 33257,
+   "purchases": 9390,
+   "revenue": 45395.76
+  },
+  {
+   "day": "2019-12-12",
+   "dau": 18920,
+   "sessions": 30847,
+   "purchases": 9396,
+   "revenue": 44951.44
+  },
+  {
+   "day": "2019-12-13",
+   "dau": 17555,
+   "sessions": 29549,
+   "purchases": 7796,
+   "revenue": 37855.33
+  },
+  {
+   "day": "2019-12-14",
+   "dau": 16446,
+   "sessions": 26082,
+   "purchases": 6038,
+   "revenue": 30544.5
+  },
+  {
+   "day": "2019-12-15",
+   "dau": 17988,
+   "sessions": 28879,
+   "purchases": 7019,
+   "revenue": 35424.67
+  },
+  {
+   "day": "2019-12-16",
+   "dau": 19387,
+   "sessions": 32463,
+   "purchases": 9226,
+   "revenue": 47316.07
+  },
+  {
+   "day": "2019-12-17",
+   "dau": 18874,
+   "sessions": 31033,
+   "purchases": 8425,
+   "revenue": 43714.89
+  },
+  {
+   "day": "2019-12-18",
+   "dau": 18779,
+   "sessions": 30936,
+   "purchases": 7818,
+   "revenue": 42605.93
+  },
+  {
+   "day": "2019-12-19",
+   "dau": 17917,
+   "sessions": 28950,
+   "purchases": 7143,
+   "revenue": 37653.8
+  },
+  {
+   "day": "2019-12-20",
+   "dau": 16596,
+   "sessions": 25807,
+   "purchases": 6308,
+   "revenue": 34870.09
+  },
+  {
+   "day": "2019-12-21",
+   "dau": 16072,
+   "sessions": 24155,
+   "purchases": 5603,
+   "revenue": 28779.7
+  },
+  {
+   "day": "2019-12-22",
+   "dau": 16232,
+   "sessions": 25202,
+   "purchases": 6086,
+   "revenue": 33169.24
+  },
+  {
+   "day": "2019-12-23",
+   "dau": 18455,
+   "sessions": 29601,
+   "purchases": 6939,
+   "revenue": 36717.56
+  },
+  {
+   "day": "2019-12-24",
+   "dau": 17356,
+   "sessions": 27478,
+   "purchases": 6901,
+   "revenue": 36863.4
+  },
+  {
+   "day": "2019-12-25",
+   "dau": 16928,
+   "sessions": 27458,
+   "purchases": 6671,
+   "revenue": 33660.8
+  },
+  {
+   "day": "2019-12-26",
+   "dau": 16116,
+   "sessions": 24748,
+   "purchases": 5914,
+   "revenue": 31428.06
+  },
+  {
+   "day": "2019-12-27",
+   "dau": 14595,
+   "sessions": 22019,
+   "purchases": 4706,
+   "revenue": 24544.19
+  },
+  {
+   "day": "2019-12-28",
+   "dau": 14574,
+   "sessions": 22397,
+   "purchases": 4786,
+   "revenue": 26292.42
+  },
+  {
+   "day": "2019-12-29",
+   "dau": 14339,
+   "sessions": 22113,
+   "purchases": 3493,
+   "revenue": 21296.68
+  },
+  {
+   "day": "2019-12-30",
+   "dau": 13249,
+   "sessions": 19623,
+   "purchases": 2633,
+   "revenue": 14237.95
+  },
+  {
+   "day": "2019-12-31",
+   "dau": 7430,
+   "sessions": 10369,
+   "purchases": 1126,
+   "revenue": 6987.74
+  }
+ ],
+ "hourly": [
+  {
+   "hour": 0,
+   "events": 36690,
+   "purchases": 2003
+  },
+  {
+   "hour": 1,
+   "events": 30674,
+   "purchases": 1648
+  },
+  {
+   "hour": 2,
+   "events": 33622,
+   "purchases": 1995
+  },
+  {
+   "hour": 3,
+   "events": 45998,
+   "purchases": 2734
+  },
+  {
+   "hour": 4,
+   "events": 67176,
+   "purchases": 3321
+  },
+  {
+   "hour": 5,
+   "events": 102487,
+   "purchases": 6068
+  },
+  {
+   "hour": 6,
+   "events": 135963,
+   "purchases": 8496
+  },
+  {
+   "hour": 7,
+   "events": 161473,
+   "purchases": 10871
+  },
+  {
+   "hour": 8,
+   "events": 180581,
+   "purchases": 11884
+  },
+  {
+   "hour": 9,
+   "events": 189407,
+   "purchases": 12642
+  },
+  {
+   "hour": 10,
+   "events": 202062,
+   "purchases": 13894
+  },
+  {
+   "hour": 11,
+   "events": 211648,
+   "purchases": 14850
+  },
+  {
+   "hour": 12,
+   "events": 207795,
+   "purchases": 13138
+  },
+  {
+   "hour": 13,
+   "events": 202191,
+   "purchases": 12455
+  },
+  {
+   "hour": 14,
+   "events": 188893,
+   "purchases": 11993
+  },
+  {
+   "hour": 15,
+   "events": 181217,
+   "purchases": 10582
+  },
+  {
+   "hour": 16,
+   "events": 186388,
+   "purchases": 10405
+  },
+  {
+   "hour": 17,
+   "events": 193911,
+   "purchases": 11046
+  },
+  {
+   "hour": 18,
+   "events": 215971,
+   "purchases": 11703
+  },
+  {
+   "hour": 19,
+   "events": 230707,
+   "purchases": 11629
+  },
+  {
+   "hour": 20,
+   "events": 216989,
+   "purchases": 12268
+  },
+  {
+   "hour": 21,
+   "events": 159684,
+   "purchases": 8896
+  },
+  {
+   "hour": 22,
+   "events": 97207,
+   "purchases": 5809
+  },
+  {
+   "hour": 23,
+   "events": 54552,
+   "purchases": 2846
+  }
+ ],
+ "retention": [
+  {
+   "cohort": "2019-11-25",
+   "w": 0,
+   "n": 17540,
+   "pct": 100.0
+  },
+  {
+   "cohort": "2019-11-25",
+   "w": 1,
+   "n": 4991,
+   "pct": 28.5
+  },
+  {
+   "cohort": "2019-11-25",
+   "w": 2,
+   "n": 3283,
+   "pct": 18.7
+  },
+  {
+   "cohort": "2019-11-25",
+   "w": 3,
+   "n": 2526,
+   "pct": 14.4
+  },
+  {
+   "cohort": "2019-11-25",
+   "w": 4,
+   "n": 1996,
+   "pct": 11.4
+  },
+  {
+   "cohort": "2019-11-25",
+   "w": 5,
+   "n": 556,
+   "pct": 3.2
+  },
+  {
+   "cohort": "2019-12-02",
+   "w": 0,
+   "n": 97070,
+   "pct": 100.0
+  },
+  {
+   "cohort": "2019-12-02",
+   "w": 1,
+   "n": 14238,
+   "pct": 14.7
+  },
+  {
+   "cohort": "2019-12-02",
+   "w": 2,
+   "n": 9755,
+   "pct": 10.0
+  },
+  {
+   "cohort": "2019-12-02",
+   "w": 3,
+   "n": 7061,
+   "pct": 7.3
+  },
+  {
+   "cohort": "2019-12-02",
+   "w": 4,
+   "n": 1590,
+   "pct": 1.6
+  },
+  {
+   "cohort": "2019-12-09",
+   "w": 0,
+   "n": 89221,
+   "pct": 100.0
+  },
+  {
+   "cohort": "2019-12-09",
+   "w": 1,
+   "n": 9808,
+   "pct": 11.0
+  },
+  {
+   "cohort": "2019-12-09",
+   "w": 2,
+   "n": 5750,
+   "pct": 6.4
+  },
+  {
+   "cohort": "2019-12-09",
+   "w": 3,
+   "n": 1090,
+   "pct": 1.2
+  },
+  {
+   "cohort": "2019-12-16",
+   "w": 0,
+   "n": 80237,
+   "pct": 100.0
+  },
+  {
+   "cohort": "2019-12-16",
+   "w": 1,
+   "n": 7018,
+   "pct": 8.7
+  },
+  {
+   "cohort": "2019-12-16",
+   "w": 2,
+   "n": 1070,
+   "pct": 1.3
+  },
+  {
+   "cohort": "2019-12-23",
+   "w": 0,
+   "n": 72864,
+   "pct": 100.0
+  },
+  {
+   "cohort": "2019-12-23",
+   "w": 1,
+   "n": 2081,
+   "pct": 2.9
+  },
+  {
+   "cohort": "2019-12-30",
+   "w": 0,
+   "n": 13222,
+   "pct": 100.0
+  }
+ ],
+ "top_brands": [
+  {
+   "brand": "runail",
+   "views": 108097,
+   "purchases": 18199,
+   "revenue": 58177.26,
+   "view_to_buy": 16.84
+  },
+  {
+   "brand": "grattol",
+   "views": 83257,
+   "purchases": 8171,
+   "revenue": 43793.5,
+   "view_to_buy": 9.81
+  },
+  {
+   "brand": "irisk",
+   "views": 66529,
+   "purchases": 10583,
+   "revenue": 35291.51,
+   "view_to_buy": 15.91
+  },
+  {
+   "brand": "uno",
+   "views": 20343,
+   "purchases": 2780,
+   "revenue": 29084.76,
+   "view_to_buy": 13.67
+  },
+  {
+   "brand": "estel",
+   "views": 44300,
+   "purchases": 4116,
+   "revenue": 24474.19,
+   "view_to_buy": 9.29
+  },
+  {
+   "brand": "jessnail",
+   "views": 34913,
+   "purchases": 1823,
+   "revenue": 24075.0,
+   "view_to_buy": 5.22
+  },
+  {
+   "brand": "strong",
+   "views": 8966,
+   "purchases": 120,
+   "revenue": 22266.41,
+   "view_to_buy": 1.34
+  },
+  {
+   "brand": "masura",
+   "views": 50363,
+   "purchases": 6985,
+   "revenue": 19809.19,
+   "view_to_buy": 13.87
+  },
+  {
+   "brand": "cnd",
+   "views": 20275,
+   "purchases": 1299,
+   "revenue": 19378.92,
+   "view_to_buy": 6.41
+  },
+  {
+   "brand": "ingarden",
+   "views": 28253,
+   "purchases": 4157,
+   "revenue": 18938.21,
+   "view_to_buy": 14.71
+  }
+ ],
+ "top_products": [
+  {
+   "product_id": 5850281,
+   "brand": "marathon",
+   "price": 137.78,
+   "views": 3392,
+   "carts": 329,
+   "purchases": 76,
+   "revenue": 10471.28
+  },
+  {
+   "product_id": 5560754,
+   "brand": "strong",
+   "price": 194.44,
+   "views": 2440,
+   "carts": 255,
+   "purchases": 52,
+   "revenue": 10110.88
+  },
+  {
+   "product_id": 5809910,
+   "brand": "grattol",
+   "price": 5.24,
+   "views": 24419,
+   "carts": 6513,
+   "purchases": 1659,
+   "revenue": 8693.16
+  },
+  {
+   "product_id": 5751422,
+   "brand": "uno",
+   "price": 10.95,
+   "views": 3711,
+   "carts": 1873,
+   "purchases": 548,
+   "revenue": 6000.6
+  },
+  {
+   "product_id": 5751383,
+   "brand": "uno",
+   "price": 10.32,
+   "views": 3934,
+   "carts": 1622,
+   "purchases": 435,
+   "revenue": 4489.2
+  },
+  {
+   "product_id": 5877454,
+   "brand": "jessnail",
+   "price": 44.29,
+   "views": 6621,
+   "carts": 519,
+   "purchases": 101,
+   "revenue": 4473.29
+  },
+  {
+   "product_id": 5909810,
+   "brand": null,
+   "price": 18.72,
+   "views": 8473,
+   "carts": 675,
+   "purchases": 231,
+   "revenue": 4326.63
+  },
+  {
+   "product_id": 5846437,
+   "brand": "browxenna",
+   "price": 45.24,
+   "views": 2780,
+   "carts": 318,
+   "purchases": 95,
+   "revenue": 4297.8
+  },
+  {
+   "product_id": 5792800,
+   "brand": null,
+   "price": 10.32,
+   "views": 2451,
+   "carts": 1268,
+   "purchases": 394,
+   "revenue": 4066.08
+  },
+  {
+   "product_id": 5849033,
+   "brand": "uno",
+   "price": 10.32,
+   "views": 3347,
+   "carts": 1481,
+   "purchases": 394,
+   "revenue": 4066.08
+  }
+ ],
+ "most_abandoned": [
+  {
+   "product_id": 5747406,
+   "brand": "masura",
+   "price": 6.33,
+   "carts": 201,
+   "removes": 239,
+   "purchases": 32
+  },
+  {
+   "product_id": 5833327,
+   "brand": "bpw.style",
+   "price": 1.59,
+   "carts": 208,
+   "removes": 222,
+   "purchases": 78
+  },
+  {
+   "product_id": 5788127,
+   "brand": null,
+   "price": 4.92,
+   "carts": 221,
+   "removes": 233,
+   "purchases": 42
+  },
+  {
+   "product_id": 5809288,
+   "brand": "bpw.style",
+   "price": 0.79,
+   "carts": 267,
+   "removes": 280,
+   "purchases": 81
+  },
+  {
+   "product_id": 5859406,
+   "brand": "masura",
+   "price": 2.37,
+   "carts": 208,
+   "removes": 215,
+   "purchases": 50
+  },
+  {
+   "product_id": 5838938,
+   "brand": "ingarden",
+   "price": 4.44,
+   "carts": 308,
+   "removes": 308,
+   "purchases": 54
+  },
+  {
+   "product_id": 5635124,
+   "brand": null,
+   "price": 4.44,
+   "carts": 216,
+   "removes": 213,
+   "purchases": 46
+  },
+  {
+   "product_id": 5788122,
+   "brand": null,
+   "price": 4.44,
+   "carts": 242,
+   "removes": 237,
+   "purchases": 49
+  },
+  {
+   "product_id": 5568210,
+   "brand": null,
+   "price": 4.75,
+   "carts": 250,
+   "removes": 243,
+   "purchases": 56
+  },
+  {
+   "product_id": 5802649,
+   "brand": null,
+   "price": 5.55,
+   "carts": 485,
+   "removes": 468,
+   "purchases": 89
+  }
+ ],
+ "price_bands": [
+  {
+   "band": "<$5",
+   "mn": 0.05,
+   "views": 840950,
+   "purchases": 148841,
+   "conv": 17.7
+  },
+  {
+   "band": "$5-10",
+   "mn": 5.0,
+   "views": 438688,
+   "purchases": 43019,
+   "conv": 9.81
+  },
+  {
+   "band": "$10-20",
+   "mn": 10.0,
+   "views": 222137,
+   "purchases": 15878,
+   "conv": 7.15
+  },
+  {
+   "band": "$20-50",
+   "mn": 20.0,
+   "views": 128584,
+   "purchases": 4177,
+   "conv": 3.25
+  },
+  {
+   "band": "$50+",
+   "mn": 50.0,
+   "views": 91905,
+   "purchases": 1243,
+   "conv": 1.35
+  }
+ ],
+ "sessions": [
+  {
+   "bought": false,
+   "sessions": 810918,
+   "avg_events": 3.5,
+   "median_minutes": 0.0
+  },
+  {
+   "bought": true,
+   "sessions": 28894,
+   "avg_events": 24.6,
+   "median_minutes": 13.1
+  }
+ ],
+ "customers": [
+  {
+   "segment": "One-time",
+   "customers": 23134,
+   "revenue": 845784.41,
+   "avg_spend": 36.56
+  },
+  {
+   "segment": "2-3 orders",
+   "customers": 2344,
+   "revenue": 199105.86,
+   "avg_spend": 84.94
+  },
+  {
+   "segment": "4+ orders",
+   "customers": 135,
+   "revenue": 32734.58,
+   "avg_spend": 242.48
+  }
+ ],
+ "aov": {
+  "aov": 37.3,
+  "median_basket": 26.16,
+  "avg_items": 7.4
+ }
+}
